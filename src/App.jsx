@@ -4,6 +4,7 @@ import { Container, Typography } from "@mui/material";
 import RandomGallery from "./components/RandomGallery";
 import NavBar from "./components/NavBar";
 import GalleryByFilter from "./components/GalleryByFilter";
+import FavoritesSection from "./components/FavoritesSection";
 
 const api_key =
   "live_xZzRUeyu7VvyLR4w6NpOJKwINtu7It7xSgcIDgvtZiffDkz0KFH55ykKiiIKXaGg";
@@ -36,6 +37,7 @@ function App() {
             />
           ))}
         <GalleryByFilter />
+        <FavoritesSection />
       </Container>
     </>
   );

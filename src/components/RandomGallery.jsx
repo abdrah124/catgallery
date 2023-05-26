@@ -1,7 +1,7 @@
 import useFetch from "../hooks/useFetch";
 import { useEffect, useRef, useState } from "react";
 import { Box, ButtonGroup, IconButton, Stack } from "@mui/material";
-import { ArrowBack, ArrowForward } from "@mui/icons-material";
+import { ArrowBack, ArrowForward, HideImage } from "@mui/icons-material";
 import * as React from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 
@@ -21,11 +21,17 @@ function CircularIndeterminate() {
   );
 }
 
-const RandomGallery = ({ url }) => {
+const RandomGallery = ({ url, breeds }) => {
   const cats = useFetch(url);
   const imageRef = useRef(null);
   const [index, setIndex] = useState(0);
   const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    if (breeds) {
+      setIndex(0);
+    }
+  }, [breeds]);
 
   useEffect(() => {
     const id = setInterval(() => {
@@ -73,14 +79,21 @@ const RandomGallery = ({ url }) => {
           position: "relative",
           backgroundColor: "rgba(40,40,40)",
           height: "288px",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
         }}
       >
-        <img
-          ref={imageRef}
-          src={cats.length > 0 && cats[index]?.url}
-          className=" h-full rounded-sm shadow-custom w-full mb-1 object-cover object-center"
-          onLoad={handleLoad}
-        />
+        {cats.length > 0 ? (
+          <img
+            ref={imageRef}
+            src={cats.length > 0 && cats[index]?.url}
+            className=" h-full rounded-sm shadow-custom w-full mb-1 object-cover object-center"
+            onLoad={handleLoad}
+          />
+        ) : (
+          <HideImage sx={{ width: 50, height: 50, color: "white" }} />
+        )}
         <Box
           sx={{
             display: "flex",
@@ -94,7 +107,7 @@ const RandomGallery = ({ url }) => {
         >
           <IconButton
             onClick={() => handleClickArrow(-1)}
-            disabled={index === 0 || !loaded}
+            disabled={index === 0 || (!loaded && cats.length < 0)}
             size="medium"
             sx={{
               width: "fit-content",
@@ -119,7 +132,7 @@ const RandomGallery = ({ url }) => {
         >
           <IconButton
             onClick={() => handleClickArrow(1)}
-            disabled={!loaded}
+            disabled={!loaded && cats.length < 0}
             sx={{
               backgroundColor: "rgba(255,255,255,.4)",
               height: "fit-content",
@@ -129,7 +142,7 @@ const RandomGallery = ({ url }) => {
           </IconButton>
         </Box>
 
-        {!loaded && <CircularIndeterminate />}
+        {!loaded && cats.length > 0 && <CircularIndeterminate />}
         <Stack
           direction="row"
           sx={{

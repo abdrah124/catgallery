@@ -11,7 +11,7 @@ function BasicSelect({ setBreeds }) {
   const [age, setAge] = React.useState("");
 
   const breeds = useFetch("https://api.thecatapi.com/v1/breeds");
-  console.log(breeds);
+
   const handleChange = (event) => {
     setAge(event.target.value);
   };
@@ -53,7 +53,8 @@ const GalleryByFilter = () => {
     <>
       <BasicSelect setBreeds={setBreeds} />
       <RandomGallery
-        url={`https://api.thecatapi.com/v1/images/search?limit=10&breed_ids=${breeds}&api_key=REPLACE_ME`}
+        url={`https://api.thecatapi.com/v1/images/search?limit=10&breed_ids=${breeds}`}
+        breeds={breeds}
       />
     </>
   );
