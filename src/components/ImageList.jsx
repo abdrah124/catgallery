@@ -1,5 +1,10 @@
 import { useRef, useState } from "react";
-import { HeartBrokenOutlined } from "@mui/icons-material";
+import {
+  Delete,
+  DeleteOutline,
+  DeleteOutlined,
+  HeartBrokenOutlined,
+} from "@mui/icons-material";
 import { Button } from "@mui/material";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
@@ -49,15 +54,22 @@ export default function StandardImageList({ itemData, onClickDelete }) {
                 srcSet={`${item.image.url}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
                 alt={item.id}
                 loading="lazy"
-                className="hover:scale-95 transition-all hover:rounded-lg"
+                className="hover:scale-95 transition-all hover:rounded-lg custom-rounded"
                 onClick={() => handleShow(item.image.url)}
               />
               <Button
                 color="error"
+                size="small"
                 variant="contained"
                 disableElevation
-                sx={{ borderRadius: "0 0 5px 5px" }}
-                endIcon={<HeartBrokenOutlined />}
+                sx={{
+                  borderRadius: "0 0 5px 5px",
+                  fontSize: 11,
+                  backgroundColor: "rgba(0,0,0,.4)",
+                  display: "flex",
+                  alignItems: "center",
+                }}
+                endIcon={<DeleteOutlined />}
                 onClick={() => handleDelete(item.id)}
               >
                 Unfav

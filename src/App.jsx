@@ -22,6 +22,7 @@ function App() {
           flexDirection: "column",
           alignItems: "center",
           paddingTop: { xs: 9, sm: 11 },
+          paddingBottom: 3,
         }}
       >
         <RandomGallery

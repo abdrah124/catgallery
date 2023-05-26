@@ -56,6 +56,7 @@ export default function FavoritesSection() {
                   variant="text"
                   aria-label={`info about cat`}
                   endIcon={<Favorite color="error" />}
+                  sx={{ color: "white" }}
                   onClick={() => handlePost(item.id)}
                 >
                   Favorite

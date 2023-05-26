@@ -5,3 +5,7 @@
 .shadow-custom {
   box-shadow: 0 0 7px -1px rgba(0, 0, 0, 0.2);
 }
+
+.custom-rounded {
+  border-radius: 5px 5px 0 0;
+}
